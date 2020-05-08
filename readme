@@ -45,18 +45,54 @@ hkeys key  获取key 所有的属性
 hvals key  获取key 所有属性所对应的值
 hlen  key  获取key的属性个数
 
-----------针对list型的操作指令---------------
+----------针对list型（有序）的操作指令---------------
 列表可以 从头部或尾部插入  (入栈 push , 出栈pop )
 
 lpush 	key value [value .....] 将一条或多条数据插入key的头部
 lset 	key index value   通过索引，修改列表的某个值
 lpushx 	key value  当key存在而且是一个列表时，才将值插入表头
+rpush   key value   [value .....] 将一条或多条数据插入key的尾部
+rpushx  key value   参考lpushx ,将数据插入尾部
+lpop    key   移除头元素
+rpop    key   移除尾部元素
+blpop  	key timeout   移除头部元素，如果列表为空，则阻塞指定有新元素出现 ，timeOut是超时时间
+brpop   key timeout   移除尾部元素，如果列表为空，则阻塞指定有新元素出现 ，timeOut是超时时间
+rpoplpush  key  key1  移除key1的尾部元素，并插入到key1的头部
+BRPOPLPUSH  key  key1 带有阻塞
+lindex   key index    获取key下标为index的元素值
+llen key  查询key的元素个数
+lrem userlist1 2 good  将userlist列表中前2个值为good的元素移除
+lrange userlist 0 5
+
+-----------针对set型（无序、不重复）的操作命令-------------
+sadd   key member1 [merber2 ....] 往set集合增加一个或多个元素
+scard  key    查看key的元素数
+sismember key  member  检查member是不是 key中的元素
+smembers  key  列出key中所有的元素
+smove key key1 member 将key中的member元素 移到 key1中
+spop key  随机移除并返回 key中的一个元素
+srandmember key  随机获取key中的一个元素
+srem key member  删除key中的某个元素
+sdiff 	key key1 ... (key 可以是一个或多个) 返回一个集合的全部成员，该集合是所有给定集合之间的差集
+sunion  key key1 ... (key 可以是一个或多个)   获得并集
+sinter  key key1 ... (key 可以是一个或多个)   获得交集
+sdiffstore anotherkey key key1 ... (key 可以是一个或多个)  把差集保持到anotherkey中
+
+-----------针对zset型（有序、不重复）的操作命令------------
+zadd  	key  score member score1 member1 ....... 把一个或多个member元素及其score值加入到key中
+zcard 	key  	查看有几个元素
+zscore 	key member 查看key中member元素的score值
+ZCOUNT key min max 返回有序集 key 中， score 值在 min 和 max 之间(默认包括 score 值等于 min 或 max )的成员的数量。
+ZINCRBY key increment member 把 member元素的score值增加 increment
+ZRANGE key  2 7 获取 key中第2到7之间的member元素 （注意，不是score值），正序
+ZREVRANGE key start stop  获取 key中第2到7之间的member元素 （注意，不是score值），倒序，由大到小
+ZRANGEBYSCORE key min max  获取score值在2到7之间的member元素
+ZRANK key member 返回有序集 key 中成员 member 的排名。其中有序集成员按 score 值递增(从小到大)顺序排列。排名以 0 为底，也就是说， score 值最小的成员排名为 0 。
 
 
 
 
 
-  
 
 
 
