@@ -1,0 +1,62 @@
+------------------------
+expire key_my  50   设置过期时间
+
+ttl key_my   查看剩余过期时间
+
+exists key_my 查看key是否存在
+
+persist 持久化
+
+type key_my 获取类型
+
+RENAME key newkey 修改 key的名字为newkey,如果newkey之前就存在，那删除newkey
+
+MOVE key db 把key移动到数据库中（redis有16个数据库  db 这个参数可以是0，1，2，3.........，切换数据库就用  select  1  ,  select 3.....）
+
+5种基本的数据类型：	string 、  set  、 list  、 hash  、zset  
+
+
+------------针对string型的操作指令--------------
+get  		获取值       
+set 		赋值
+mget 		获取多个值   （mget  user1 user2）
+mset 		设置多个值   （ mset user wanghe1 user1 wangxiucai1）
+getrange 	获取字符串的某部分范围的字符值  （getrange key 0 4    获取第一个到第五个字符）
+getset      设置一个值，并获取原来的老值
+setex key_my second value  设置key及过期时间  （set school 10 changchunligong  设置10秒过期）
+setnx       如果key不存在，就设置一个值（就是插入，不更新）
+msetnx		同setnx类似，但可设置多个值
+append key value  在字符串末尾直接内容
+strlen key  查询key的长度
+INCRBY key increment   把key的值增加（限于数字，比如key 是20 ，incrby key 5 ,那key的值就变为25）
+INCRBYFLOAT key increment   增加浮点数
+
+
+-----------针对hash型的操作指令----------
+hset  key  field value  设置一个属性值
+hmset key  field value field1 value1 .... 设置多个属性值
+hget  key  field   获取一个属性
+hmget key  field1  field2  获取多个属性
+hsetnx key  field value  仅当该属性不存在时，才设置这个属性
+hgetall key 获取key的所有属性和对应值
+hexists key field  查看key是否存在某个属性值
+hdel key field  删除key的某个属性值
+hkeys key  获取key 所有的属性
+hvals key  获取key 所有属性所对应的值
+hlen  key  获取key的属性个数
+
+----------针对list型的操作指令---------------
+列表可以 从头部或尾部插入  (入栈 push , 出栈pop )
+
+lpush 	key value [value .....] 将一条或多条数据插入key的头部
+lset 	key index value   通过索引，修改列表的某个值
+lpushx 	key value  当key存在而且是一个列表时，才将值插入表头
+
+
+
+
+
+  
+
+
+
